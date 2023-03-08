@@ -1,7 +1,8 @@
 body{
     margin: 0;
     padding: 0;
-    background-color: #E8E8E8;
+    background-color: #FAFAFA;
+    font-family: 'Roboto', sans-serif;
 }
 
 h2{
@@ -36,6 +37,24 @@ p{
     margin: 40px;
 }
 
+.left_bottom{
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.match{
+    width: 80%;
+    background-color: #fff;
+    height: 60px;
+    margin-top: 20px;
+}
+
+.match h3{
+    text-align: center;
+}
 
 .right{
     display: flex;
@@ -46,6 +65,7 @@ p{
 
 .logo{
     width: 45%;
+    margin-top: 20px;
 }
 
 .logo img{
