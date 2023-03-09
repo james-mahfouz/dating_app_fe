@@ -1,7 +1,5 @@
 window.onload = function(id) {
-    
 
-    change_suggestions("images/man.png", "John Smith", "Beirut", "male", "hello world")
     function change_suggestions(url, name, location, gender, bio){
         image=document.querySelector('.user_image img')
         sugg_name = document.querySelector('#sugg_name')
@@ -9,10 +7,19 @@ window.onload = function(id) {
         sugg_gender = document.querySelector('#sugg_gender')
         sugg_bio = document.querySelector('#sugg_bio')
 
+        const location_icon = document.createElement("i")
+        location_icon.classList.add("fa-solid", "fa-location-dot")
+        const gender_icon = document.createElement("i")
+        gender_icon.classList.add("fa-solid", "fa-mars-and-venus")
+
         image.src = url
-        sugg_name.textContent = name
-        sugg_location.textContent = location
-        sugg_gender.textContent = gender
+        sugg_name.textContent =  name
+        sugg_location.innerHTML = ""
+        sugg_location.appendChild(location_icon) 
+        sugg_location.innerHTML += location 
+        sugg_gender.innerHTML = ""
+        sugg_gender.appendChild(gender_icon)
+        sugg_gender.innerHTML += gender
         sugg_bio.textContent = bio
     }
     
