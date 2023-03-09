@@ -1,5 +1,5 @@
 window.onload = function() {
-    signup = document.getElementById('register-btn')
+    signup = document.getElementById('register_btn')
 
     signup.addEventListener('click', check_infos)
 
@@ -20,6 +20,11 @@ window.onload = function() {
             country,
         }
 
-        
+        axios.post("http://localhost/dating-app-be/Authentication/signup.php",data,{headers: { "Content-Type": "multipart/form-data" }})
+        .then(response => {
+            console.log(response.data)
+        }).catch(error=>{
+
+        })
     }
 }
