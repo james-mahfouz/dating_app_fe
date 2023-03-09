@@ -140,10 +140,23 @@ label{
     text-align: justify;
 }
 
+@media (max-width: 850px) {
+    .suggestions{
+        flex-direction: column;
+        text-align: center;
+    }
+    .user_image{
+        width: 100%;
+    }
+    .infos{
+        width: 100%;
+        align-items: start;
+    }
+}
+
 .signin-wrapper{
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
 }
 .signin-logo{

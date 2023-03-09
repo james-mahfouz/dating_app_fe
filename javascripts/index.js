@@ -1,5 +1,8 @@
 window.onload = function(id) {
 
+    dislike= document.querySelector(".dislike-icon")
+    like= document.querySelector(".like-icon")
+
     function change_suggestions(url, name, location, gender, bio){
         image=document.querySelector('.user_image img')
         sugg_name = document.querySelector('#sugg_name')
