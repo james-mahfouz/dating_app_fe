@@ -6,7 +6,8 @@ window.onload = function() {
     function check_infos() {
         console.log('Checking')
         let email = document.getElementById('e_mail').value
-         let password = document.getElementById('pass_code').value
-    }
+        let password = document.getElementById('pass_code').value
 
+    }
+    
 }
