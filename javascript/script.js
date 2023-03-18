@@ -92,3 +92,7 @@ workshop_pages.load_index = async () => {
     username.innerHTML += user.name
 }
 
+workshop_pages.load_profile = async () =>{
+    
+}
+
