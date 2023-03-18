@@ -17,7 +17,7 @@ workshop_pages.postAPI = async (api_url, api_data, api_token = null) => {
             api_data,
             {
                 headers:{
-                    'Authorization' : "token " + api_token
+                    'Authorization' : "token" + api_token
                 }
             }
         );
@@ -37,13 +37,16 @@ workshop_pages.load_login = async () => {
     signin.addEventListener('click', check_infos)
 
     async function check_infos() {
-        console.log('Checking')
         const email = document.getElementById('e_mail').value
         const password = document.getElementById('pass_code').value
         const get_users_url = workshop_pages.base_url + `login?email=${email}&password=${password}`;
         const response = await workshop_pages.getAPI(get_users_url);
-        console,log(response.data);
-
+        console.log(response.data);
+        if (response.data.status=="success"){
+            localStorage.setItem('token',response.data.authorisation.token)
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+            window.location.href = 'index.html'
+        }
     }
 }
 
@@ -73,14 +76,25 @@ workshop_pages.load_register = () => {
 
         const response = await workshop_pages.postAPI(register_users_url, data);
         if (response.data.status=="success"){
-            console.log(response.data)
             localStorage.setItem('token',response.data.authorisation.token)
             window.location.href = 'index.html'
         }
     }
 }
 
-workshop_pages.load_index = () => {
-    alert(x);
+workshop_pages.load_index = async () => {
+    const token = localStorage.getItem('token')
+    const verify_url = base_url + "verify"
+
+    const respnse = await workshop_pages.postAPI(verify_url, {}, token)
+    if(response.data.status == "success"){
+        let user = JSON.parse(localStorage.getItem('user'));
+        console.log(user.name);
+        console.log(user.email);
+        console.log(user.country);
+    }
+    else{
+        window.location.href = 'login.html'
+    }
 }
 
