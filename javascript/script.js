@@ -84,17 +84,11 @@ workshop_pages.load_register = () => {
 
 workshop_pages.load_index = async () => {
     const token = localStorage.getItem('token')
-    const verify_url = base_url + "verify"
-
-    const respnse = await workshop_pages.postAPI(verify_url, {}, token)
-    if(response.data.status == "success"){
-        let user = JSON.parse(localStorage.getItem('user'));
-        console.log(user.name);
-        console.log(user.email);
-        console.log(user.country);
+    if(token == null){
+        window.location.href = 'login.html' 
     }
-    else{
-        window.location.href = 'login.html'
-    }
+    let user = JSON.parse(localStorage.getItem('user'));
+    let username = document.getElementById('username')
+    username.innerHTML += user.name
 }
 
