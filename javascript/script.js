@@ -30,13 +30,24 @@ workshop_pages.loadFor = (page) => {
     eval("workshop_pages.load_" + page + "();");
 }
 
-workshop_pages.load_signin = async () => {
-    const get_users_url = workshop_pages.base_url + "get_users.php";
-    const response = await workshop_pages.getAPI(get_users_url);
-    console.log(response.data);
+workshop_pages.load_login = async () => {
+    const get_users_url = workshop_pages.base_url + "login";
+    signin = document.getElementById('signin_btn')
+
+    signin.addEventListener('click', check_infos)
+
+    function check_infos() {
+        console.log('Checking')
+        let email = document.getElementById('e_mail').value
+        let password = document.getElementById('pass_code').value
+        const data = new FormData()
+        data.append()
+        const response = await workshop_pages.getAPI(get_users_url);
+
+    }
 }
 
-workshop_pages.load_signup = () => {
+workshop_pages.load_register = () => {
     signup = document.getElementById('register_btn')
 
     signup.addEventListener('click', check_infos)
@@ -47,7 +58,6 @@ workshop_pages.load_signup = () => {
         let age = document.getElementById('age').value
         let email = document.getElementById('e_mail').value
         let gender = document.getElementById("gender").value
-        console.log(gender)
         let password = document.getElementById('pass_code').value
         let country = document.getElementById('country').value
 
@@ -62,9 +72,11 @@ workshop_pages.load_signup = () => {
     
 
         const response = await workshop_pages.postAPI(register_users_url, data);
-        console.log(response.data)
-        localStorage.setItem('token',response.data.authorisation.token)
-        window.location.href = 'index.html'
+        if (response.data.status=="success"){
+            console.log(response.data)
+            localStorage.setItem('token',response.data.authorisation.token)
+            window.location.href = 'index.html'
+        }
     }
 }
 workshop_pages.load_index = () => {
