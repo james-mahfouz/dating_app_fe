@@ -8,23 +8,24 @@ window.onload = function() {
         let age = document.getElementById('age').value
         let email = document.getElementById('e_mail').value
         let gender = document.getElementById("gender").value
+        console.log(gender)
         let password = document.getElementById('pass_code').value
         let country = document.getElementById('country').value
 
-        const data = {
-            email,
-            password,
-            age,
-            firstName,
-            gender,
-            country,
-        }
+        age = parseInt(age)
+        const data = new FormData()
+        data.append('name',firstName)
+        data.append('email',email)
+        data.append('gender',gender)
+        data.append('password',password)
+        data.append('country',country)
+        data.append('age',age)
 
-        axios.post("http://localhost/dating-app-be/Authentication/signup.php",data,{headers: { "Content-Type": "multipart/form-data" }})
+        axios.post("http://localhost:8000/api/v0.0.1/users/register",data)
         .then(response => {
             console.log(response.data)
         }).catch(error=>{
-
+            console.log(error)
         })
     }
 }
