@@ -31,18 +31,18 @@ workshop_pages.loadFor = (page) => {
 }
 
 workshop_pages.load_login = async () => {
-    const get_users_url = workshop_pages.base_url + "login";
+    
     signin = document.getElementById('signin_btn')
 
     signin.addEventListener('click', check_infos)
 
-    function check_infos() {
+    async function check_infos() {
         console.log('Checking')
-        let email = document.getElementById('e_mail').value
-        let password = document.getElementById('pass_code').value
-        const data = new FormData()
-        data.append()
+        const email = document.getElementById('e_mail').value
+        const password = document.getElementById('pass_code').value
+        const get_users_url = workshop_pages.base_url + `login?email=${email}&password=${password}`;
         const response = await workshop_pages.getAPI(get_users_url);
+        console,log(response.data);
 
     }
 }
@@ -79,6 +79,7 @@ workshop_pages.load_register = () => {
         }
     }
 }
+
 workshop_pages.load_index = () => {
     alert(x);
 }
