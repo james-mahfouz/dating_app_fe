@@ -99,6 +99,25 @@ a{
     width: 100%;
 }
 
+.filter{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+.country_list_filter{
+    width: 30%;
+}
+
+.filter input, .filter select{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+}
+
 .suggestions{
     display: flex;
     flex-direction: row;

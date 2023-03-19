@@ -78,7 +78,7 @@ workshop_pages.load_register = async () => {
         let email = document.getElementById('e_mail').value
         let gender = document.getElementById("gender").value
         let password = document.getElementById('pass_code').value
-        let country = document.getElementById('country').value
+        let country = document.getElementById('country_list').value
 
         age = parseInt(age)
         const data = new FormData()
@@ -93,6 +93,7 @@ workshop_pages.load_register = async () => {
         const response = await workshop_pages.postAPI(register_users_url, data);
         if (response.data.status=="success"){
             localStorage.setItem('token',response.data.authorisation.token)
+            localStorage.setItem('user', JSON.stringify(response.data.user));
             window.location.href = 'index.html'
         }
     }

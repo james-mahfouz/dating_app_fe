@@ -49,15 +49,16 @@
                 </div>
                 <div class="filter_input">
                     <label>Age</label>
-                    <input id="smaller_age" type="number">
+                    <input type="number" id="smaller_age">
                     <input type="number" id="highest_age">
                 </div>
                 <div class="filter_input">
-                    <label>Gender</label>
-                    <div class="custom_select">
-                        <select id="country_list"></select>
-                    </div>
+                    <label>Countries</label>
+                    <select id="country_list" class="country_list_filter"></select>
                 </div> 
+                <div class="filter_input">
+                    <button id="filter_btn">Filter</button>
+                </div>
             </div>
             <div class="suggestions">
                 <div class="user_image">
