@@ -115,6 +115,15 @@ a{
     width: 30%;
 }
 
+.name_list{
+    list-style: none;
+    background-color: #fff;
+    color: rgba(0,0,0,0.8);
+    border: solid 1px #000;
+    margin-left: 0;
+    height: 20px;
+}
+
 .filter input, .filter select{
     display: flex;
     flex-direction: column;

@@ -181,13 +181,11 @@ workshop_pages.load_index = async () => {
         first_time=0
         const query = event.target.value;
         const results = fuse.search(query);
-        console.log(results)
         results.forEach((result) => {
             const list_item = document.createElement("li")
             list_item.className = "name_list"
             list_item.id = result.id
             list_item.textContent = result.item.name; 
-            console.log(result.item.name)
             name_results.appendChild(list_item);
         });
         
