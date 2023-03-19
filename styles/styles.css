@@ -17,6 +17,9 @@ p{
 label{
     color: rgba(0,0,0,0.6);
 }
+i{
+    color: rgba(0,0,0,0.6);
+}
 
 .container{
     display: flex;
@@ -46,6 +49,8 @@ label{
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 50%;  
+    overflow: auto;
 }
 
 .match{
@@ -136,8 +141,27 @@ label{
     margin: 30px;
 }
 
+.text div{
+    display: flex;
+    align-items: center;
+}
+
 .text p{
     text-align: justify;
+
+}
+
+#sugg_bio{
+    max-width: 100%;
+}
+
+#edit{
+    width: 100%;
+    color: #fff;
+    background-color: #FF5858;
+    height: 30px;
+    border: none;
+    border-radius: 50px;
 }
 
 @media (max-width: 850px) {

@@ -93,6 +93,63 @@ workshop_pages.load_index = async () => {
 }
 
 workshop_pages.load_profile = async () =>{
-    
+    const token = localStorage.getItem('token')
+    if(token == null){
+        window.location.href = 'login.html' 
+    }
+    let user = JSON.parse(localStorage.getItem('user'));
+    const gender = user.genders_id == 1 ? "Male" : "Female";
+    user_profile(user.name,user.country, gender, user.description)
+
+    let user_name = document.getElementById("sugg_name")
+    let user_location = document.getElementById("sugg_location")
+    let user_bio = document.getElementById("sugg_bio")
+
+    user_bio.addEventListener("blur", function() {
+        const newText = user_bio.textContent;
+        user_bio.textContent = newText;
+    });
+
+    user_name.addEventListener("blur", function() {
+        const newText = user_name.textContent;
+        user_name.textContent = newText;
+    });
+
+    user_location.addEventListener("blur", function() {
+        const newText = user_location.textContent;
+        user_location.textContent = newText;
+    });
+
+    const edit = document.getElementById("edit")
+    edit.addEventListener("click",edit_profile)
+
+    function edit_profile(){
+        const edit_name = document.getElementById('sugg_name')
+        const edit_description = document.getElementById('sugg_bio')
+        const edit_country = document.getElementById('sugg_location')
+
+        const data = new FormData()
+        data.append('name',edit_name)
+        data.append('description',edit_description)
+        data.append(edit_country)
+
+        const response = await workshop_pages.postAPI(workshop_pages.base_url+)
+    }
+        function user_profile(name, location, gender, bio,url = "images/user.jpg"){
+        image=document.querySelector('.user_image img')
+        sugg_name = document.querySelector('#sugg_name')
+        sugg_location = document.querySelector('#sugg_location')
+        sugg_gender = document.querySelector('#sugg_gender')
+        sugg_bio = document.querySelector('#sugg_bio')
+
+        image.src = url
+        sugg_name.textContent +=  name
+        sugg_location.innerHTML += location 
+        sugg_gender.innerHTML += gender
+        if (bio != null){
+            sugg_bio.textContent = bio
+        }
+    }
+
 }
 

@@ -6,35 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/1fea503669.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/styles.css">
     <title>Your Profile</title>
 </head>
 <body>
     <div class="container">
-        <section class="left">
-            <div class="top_left">
-                <div class="user_name">
-                    <h1 id="username"><i class="fa-solid fa-user"></i></h1>
-                </div>
-            </div>
-            <div class="left_bottom">
-                <div>
-                    <h2>Matches</h2>
-                </div>
-                <div class="match">
-                    <h3>Nabiha Nabiha</h3>
-                </div>
-
-                <div class="match">
-                    <h3>Souraya</h3>
-                </div>
-
-                <div class="match">
-                    <h3>Souraya</h3>
-                </div>
-
-            </div>    
-        </section>
-
         <section class="right">
             <div class="logo">
                 <img src="images/logo.png" alt="">
@@ -47,11 +23,12 @@
                 </div>
                 <div class="infos">
                     <div class="text">
-                        <h2 id="sugg_name">Najib Khoury</h2>
-                        <h3 id="sugg_location"><i class="fa-solid fa-location-dot"></i> Location</h3>
-                        <h3 id="sugg_gender"><i class="fa-solid fa-mars-and-venus"></i>Gender</h3>
+                        <h2 id="sugg_name" contenteditable maxlength="50"></h2>
+                        <div><i class="fa-solid fa-location-dot"></i><h3 id="sugg_location" contenteditable maxlength="50"></h3></div>
+                        <div><i class="fa-solid fa-mars-and-venus"></i><h3 id="sugg_gender"></h3></div>
                         <h3>BIO</h3>
-                        <p id="sugg_bio">I’m the real life of the party, I love to have fun and also enjoy spending time with friends and family. I’m also looking for someone who shares my love of god and love of family events.</p>
+                        <p id="sugg_bio" contenteditable maxlength="150">Write your description here</p>
+                        <button id="edit">Edit infos</button>
                     </div>    
                 </div>
             </div>
