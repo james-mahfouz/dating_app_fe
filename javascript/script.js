@@ -2,7 +2,7 @@ const workshop_pages = {};
 
 workshop_pages.base_url = "http://localhost:8000/api/v0.0.1/users/";
 
-workshop_pages.getAPI = async (api_url, api_token) => {
+workshop_pages.getAPI = async (api_url, api_token=null) => {
     try{
         return await axios(
             api_url,
@@ -58,11 +58,21 @@ workshop_pages.load_login = async () => {
     }
 }
 
-workshop_pages.load_register = () => {
+workshop_pages.load_register = async () => {
+    const country_list  = document.getElementById('country_list')
+    
+    const response = await workshop_pages.getAPI('https://restcountries.com/v2/all')
+    const country_names = response.data.map(country => country.name);
+    country_names.forEach(name => {
+        console.log(name)
+        const option = document.createElement('option');
+        option.value = name
+        option.text = name
+        country_list.appendChild(option);
+    });
+
     signup = document.getElementById('register_btn')
-
     signup.addEventListener('click', check_infos)
-
     async function check_infos() {
         const register_users_url = workshop_pages.base_url + "register";
         let firstName = document.getElementById('f_name').value
