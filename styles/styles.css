@@ -20,6 +20,10 @@ label{
 i{
     color: rgba(0,0,0,0.6);
 }
+a{
+    color: inherit;
+    text-decoration: none;
+}
 
 .container{
     display: flex;
