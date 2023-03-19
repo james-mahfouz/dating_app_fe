@@ -130,7 +130,6 @@ workshop_pages.load_index = async () => {
 
     const filter_button = document.getElementById('filter_btn')
     filter_button.addEventListener('click', () =>{
-        // const Fuse = require('node_modules/fuse.js/dist/fuse.js');
         filtered_users = []
         let smaller_age = document.getElementById('smaller_age').value
         let highest_age = document.getElementById('highest_age').value
@@ -162,6 +161,20 @@ workshop_pages.load_index = async () => {
             }
         }
     })
+
+    const fuse = new Fuse(users, {
+        keys: ['name'],
+        threshold: 0.3, // adjust this to fine-tune the search
+    });
+      
+    const 
+    const filter_name = document.getElementById('filter_name');
+    filter_name.addEventListener('input', (event) => {
+        const query = event.target.value;
+        const results = fuse.search(query);
+        
+    });
+      
 
     dislike= document.querySelector(".dislike-icon")
     like= document.querySelector(".like-icon")
