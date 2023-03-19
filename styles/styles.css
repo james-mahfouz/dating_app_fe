@@ -124,6 +124,11 @@ a{
     height: 20px;
 }
 
+#name_results{
+    position: absolute;
+    z-index: 1;
+}
+
 .filter input, .filter select{
     display: flex;
     flex-direction: column;

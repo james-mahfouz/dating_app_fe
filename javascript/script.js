@@ -105,15 +105,15 @@ workshop_pages.load_index = async () => {
         window.location.href = 'login.html' 
     }
 
-    // const country_list  = document.getElementById('country_list')
-    // const countries = await workshop_pages.getAPI('https://restcountries.com/v2/all')
-    // const country_names = countries.data.map(country => country.name);
-    // country_names.forEach(name => {
-    //     const option = document.createElement('option');
-    //     option.value = name
-    //     option.text = name
-    //     country_list.appendChild(option);
-    // });
+    const country_list  = document.getElementById('country_list')
+    const countries = await workshop_pages.getAPI('https://restcountries.com/v2/all')
+    const country_names = countries.data.map(country => country.name);
+    country_names.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name
+        option.text = name
+        country_list.appendChild(option);
+    });
 
     let user = JSON.parse(localStorage.getItem('user'));
     let username = document.getElementById('username')
@@ -188,7 +188,6 @@ workshop_pages.load_index = async () => {
             list_item.textContent = result.item.name; 
             name_results.appendChild(list_item);
         });
-        
     });
       
 
@@ -273,6 +272,15 @@ workshop_pages.load_profile = async () =>{
 
     const edit = document.getElementById("edit")
     edit.addEventListener("click",edit_profile)
+    let input_picture = document.getElementById("input_picture");
+    let pp = document.getElementById("pp");
+    input_picture.addEventListener("change", handleFiles, false);
+
+    function handleFiles() {
+        let selected_file = this.files[0];
+        let imageURL = URL.createObjectURL(selected_file);
+        pp.src = imageURL;
+    }
 
     async function edit_profile(){
         const edit_name = document.getElementById('sugg_name').innerHTML
@@ -289,6 +297,11 @@ workshop_pages.load_profile = async () =>{
             localStorage.removeItem('user')
             localStorage.setItem('user', JSON.stringify(response.data.user));
         }
+
+        input_picture = document.getElementById("input_picture").files[0];
+        const picture = new FormData()
+        picture.append('profile_picture', input_picture)
+        workshop_pages.postAPI(workshop_pages.base_url + "upload_picture",picture, token)
     }
     function user_profile(name, location, gender, bio,url = "images/user.jpg"){
         image=document.querySelector('.user_image img')
