@@ -123,9 +123,23 @@ workshop_pages.load_index = async () => {
     data.append('gender', user.genders_id)
     const response = await workshop_pages.postAPI(workshop_pages.base_url + 'getusers', data, token)
     const users = response.data
+    let filtered_users = users
     let index = 0
-    let user_sugg = users[index]
+    let user_sugg = filtered_users[index]
     change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
+
+    const filter_button = document.getElementById('filter_button')
+    filter_button.addEventListener('click', () =>{
+        const Fuse = require('fuse.js');
+        let filter_name = document.getElementById('filter_name')
+        let smaller_age = document.getElementById('smaller_age')
+        let highest_age = document.getElementById('highes_age')
+        let country_list = document.getElementById('country')
+
+        for(let i = 0; i<users.length; i++){
+
+        }
+    })
 
     dislike= document.querySelector(".dislike-icon")
     like= document.querySelector(".like-icon")
@@ -168,12 +182,12 @@ workshop_pages.load_index = async () => {
         }
     }
     function change_index(){
-        if(index < users.length-1){
+        if(index < filtered_users.length-1){
             index+=1
         }else{
             index = 0
         }
-        user_sugg = users[index]
+        user_sugg = filtered_users[index]
     }
 }
 

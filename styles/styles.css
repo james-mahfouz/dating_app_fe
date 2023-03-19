@@ -107,6 +107,10 @@ a{
     justify-content: center;
 }
 
+#filter_name{
+    box-sizing: border-box;
+}
+
 .country_list_filter{
     width: 30%;
 }
