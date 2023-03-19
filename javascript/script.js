@@ -17,7 +17,7 @@ workshop_pages.postAPI = async (api_url, api_data, api_token = null) => {
             api_data,
             {
                 headers:{
-                    'Authorization' : "token" + api_token
+                    'Authorization' : `Bearer ${api_token}`
                 }
             }
         );
@@ -123,7 +123,7 @@ workshop_pages.load_profile = async () =>{
     const edit = document.getElementById("edit")
     edit.addEventListener("click",edit_profile)
 
-    function edit_profile(){
+    async function edit_profile(){
         const edit_name = document.getElementById('sugg_name')
         const edit_description = document.getElementById('sugg_bio')
         const edit_country = document.getElementById('sugg_location')
@@ -131,11 +131,12 @@ workshop_pages.load_profile = async () =>{
         const data = new FormData()
         data.append('name',edit_name)
         data.append('description',edit_description)
-        data.append(edit_country)
+        data.append('country', edit_country)
 
-        const response = await workshop_pages.postAPI(workshop_pages.base_url+)
+        const response = await workshop_pages.postAPI(workshop_pages.base_url+change, data, token)
+        console.log(response)
     }
-        function user_profile(name, location, gender, bio,url = "images/user.jpg"){
+    function user_profile(name, location, gender, bio,url = "images/user.jpg"){
         image=document.querySelector('.user_image img')
         sugg_name = document.querySelector('#sugg_name')
         sugg_location = document.querySelector('#sugg_location')
