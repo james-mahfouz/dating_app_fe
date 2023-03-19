@@ -154,6 +154,13 @@ workshop_pages.load_index = async () => {
                 }
             }
         }
+        if(country_list!=null){
+            for(let i = 0; i<users.length; i++){
+                if(users[i].country == country_list){
+                    filtered_users.push(users[i])
+                }
+            }
+        }
     })
 
     dislike= document.querySelector(".dislike-icon")
