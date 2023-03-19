@@ -126,18 +126,33 @@ workshop_pages.load_index = async () => {
     let filtered_users = users
     let index = 0
     let user_sugg = filtered_users[index]
-    change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
+    change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id)
 
-    const filter_button = document.getElementById('filter_button')
+    const filter_button = document.getElementById('filter_btn')
     filter_button.addEventListener('click', () =>{
-        const Fuse = require('fuse.js');
-        let filter_name = document.getElementById('filter_name')
-        let smaller_age = document.getElementById('smaller_age')
-        let highest_age = document.getElementById('highes_age')
-        let country_list = document.getElementById('country')
-
-        for(let i = 0; i<users.length; i++){
-
+        // const Fuse = require('node_modules/fuse.js/dist/fuse.js');
+        filtered_users = []
+        let smaller_age = document.getElementById('smaller_age').value
+        let highest_age = document.getElementById('highest_age').value
+        let country_list = document.getElementById('country_list').value
+        if(smaller_age!=null && highest_age==null){
+            for(let i = 0; i<users.length; i++){
+                if(users[i].age>smaller_age){
+                    filtered_users.push(users[i])
+                }
+            }
+        }else if(smaller_age==null && highest_age!=null){
+            for(let i = 0; i<users.length; i++){
+                if(users[i].age<highest_age){
+                    filtered_users.push(users[i])
+                }
+            }
+        }else if(smaller_age!=null && highest_age!=null){
+            for(let i = 0; i<users.length; i++){
+                if(users[i].age>smaller_age && users[i].age<highest_age){
+                    filtered_users.push(users[i])
+                }
+            }
         }
     })
 
@@ -146,11 +161,11 @@ workshop_pages.load_index = async () => {
 
     dislike.addEventListener("click", () => {
         change_index()
-        change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
+        change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id)
     })
     like.addEventListener("click", () => {
         change_index()
-        change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
+        change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id)
     })
 
     const logout = document.getElementById('logout_btn')
@@ -162,7 +177,7 @@ workshop_pages.load_index = async () => {
         window.location.href = 'login.html'
     })
     
-    function change_suggestions(name, location, gender, bio, url = "images/user.jpg"){
+    function change_suggestions(name,age, location, gender, bio, url = "images/user.jpg"){
         image=document.querySelector('.user_image img')
         sugg_name = document.querySelector('#sugg_name')
         sugg_location = document.querySelector('#sugg_location')
@@ -170,7 +185,7 @@ workshop_pages.load_index = async () => {
         sugg_bio = document.querySelector('#sugg_bio')
 
         image.src = url
-        sugg_name.textContent =  name
+        sugg_name.textContent =  name+', '+age
         sugg_location.innerHTML = location 
         if(gender == 1){
             sugg_gender.innerHTML = 'Male'
