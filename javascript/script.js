@@ -124,17 +124,20 @@ workshop_pages.load_profile = async () =>{
     edit.addEventListener("click",edit_profile)
 
     async function edit_profile(){
-        const edit_name = document.getElementById('sugg_name')
-        const edit_description = document.getElementById('sugg_bio')
-        const edit_country = document.getElementById('sugg_location')
+        const edit_name = document.getElementById('sugg_name').innerHTML
+        const edit_description = document.getElementById('sugg_bio').innerHTML
+        const edit_country = document.getElementById('sugg_location').innerHTML
 
         const data = new FormData()
         data.append('name',edit_name)
         data.append('description',edit_description)
         data.append('country', edit_country)
 
-        const response = await workshop_pages.postAPI(workshop_pages.base_url+change, data, token)
-        console.log(response)
+        const response = await workshop_pages.postAPI(workshop_pages.base_url+"change", data, token)
+        if(response.data.status == "success"){
+            localStorage.removeItem('user')
+            localStorage.setItem('user', JSON.stringify(response.data.user));
+        }
     }
     function user_profile(name, location, gender, bio,url = "images/user.jpg"){
         image=document.querySelector('.user_image img')
