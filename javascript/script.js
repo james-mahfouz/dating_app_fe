@@ -105,15 +105,15 @@ workshop_pages.load_index = async () => {
         window.location.href = 'login.html' 
     }
 
-    const country_list  = document.getElementById('country_list')
-    const countries = await workshop_pages.getAPI('https://restcountries.com/v2/all')
-    const country_names = countries.data.map(country => country.name);
-    country_names.forEach(name => {
-        const option = document.createElement('option');
-        option.value = name
-        option.text = name
-        country_list.appendChild(option);
-    });
+    // const country_list  = document.getElementById('country_list')
+    // const countries = await workshop_pages.getAPI('https://restcountries.com/v2/all')
+    // const country_names = countries.data.map(country => country.name);
+    // country_names.forEach(name => {
+    //     const option = document.createElement('option');
+    //     option.value = name
+    //     option.text = name
+    //     country_list.appendChild(option);
+    // });
 
     let user = JSON.parse(localStorage.getItem('user'));
     let username = document.getElementById('username')
@@ -164,14 +164,32 @@ workshop_pages.load_index = async () => {
 
     const fuse = new Fuse(users, {
         keys: ['name'],
-        threshold: 0.3, // adjust this to fine-tune the search
+        threshold: 0.3, 
     });
       
-    const 
+    const name_results = document.getElementById('name_results')
     const filter_name = document.getElementById('filter_name');
+    let first_time = 1
     filter_name.addEventListener('input', (event) => {
+        if(first_time==0){   
+            const elements = document.getElementsByClassName("name_list");
+            while (elements.length > 0) {
+                elements[0].remove();
+            }
+        }
+        first_time=0
+        first_time=0
         const query = event.target.value;
         const results = fuse.search(query);
+        console.log(results)
+        results.forEach((result) => {
+            const list_item = document.createElement("li")
+            list_item.className = "name_list"
+            list_item.id = result.id
+            list_item.textContent = result.item.name; 
+            console.log(result.item.name)
+            name_results.appendChild(list_item);
+        });
         
     });
       
@@ -189,6 +207,7 @@ workshop_pages.load_index = async () => {
     })
 
     const logout = document.getElementById('logout_btn')
+    
     logout.addEventListener('click', async () =>{
         const response = await workshop_pages.getAPI(workshop_pages.base_url + 'logout', token)
         console.log(response.data)
