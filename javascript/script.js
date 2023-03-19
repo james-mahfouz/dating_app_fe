@@ -2,9 +2,17 @@ const workshop_pages = {};
 
 workshop_pages.base_url = "http://localhost:8000/api/v0.0.1/users/";
 
-workshop_pages.getAPI = async (api_url) => {
+workshop_pages.getAPI = async (api_url, api_token) => {
     try{
-        return await axios(api_url);
+        return await axios(
+            api_url,
+            {
+                headers:{
+                    'Authorization' : `Bearer ${api_token}`
+                }
+            }
+        );
+
     }catch(error){
         console.log("Error from GET API");
     }
@@ -94,11 +102,32 @@ workshop_pages.load_index = async () => {
     const data = new FormData()
     data.append('gender', user.genders_id)
     const response = await workshop_pages.postAPI(workshop_pages.base_url + 'getusers', data, token)
-    sugg_users = response.data
+    const users = response.data
+    let index = 0
+    let user_sugg = users[index]
+    change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
 
     dislike= document.querySelector(".dislike-icon")
     like= document.querySelector(".like-icon")
 
+    dislike.addEventListener("click", () => {
+        change_index()
+        change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
+    })
+    like.addEventListener("click", () => {
+        change_index()
+        change_suggestions(user_sugg.name, user_sugg.country, user_sugg.genders_id)
+    })
+
+    const logout = document.getElementById('logout_btn')
+    logout.addEventListener('click', async () =>{
+        const response = await workshop_pages.getAPI(workshop_pages.base_url + 'logout', token)
+        console.log(response.data)
+        localStorage.removeItem('user')
+        localStorage.removeItem('token')
+        window.location.href = 'login.html'
+    })
+    
     function change_suggestions(name, location, gender, bio, url = "images/user.jpg"){
         image=document.querySelector('.user_image img')
         sugg_name = document.querySelector('#sugg_name')
@@ -109,10 +138,22 @@ workshop_pages.load_index = async () => {
         image.src = url
         sugg_name.textContent =  name
         sugg_location.innerHTML = location 
-        sugg_gender.innerHTML = gender
+        if(gender == 1){
+            sugg_gender.innerHTML = 'Male'
+        }else{
+            sugg_gender.innerHTML = 'Female'
+        }
         if (bio != null){
             sugg_bio.textContent = bio
         }
+    }
+    function change_index(){
+        if(index < users.length-1){
+            index+=1
+        }else{
+            index = 0
+        }
+        user_sugg = users[index]
     }
 }
 
@@ -178,6 +219,5 @@ workshop_pages.load_profile = async () =>{
             sugg_bio.textContent = bio
         }
     }
-
 }
 
