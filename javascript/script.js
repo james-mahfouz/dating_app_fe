@@ -60,11 +60,9 @@ workshop_pages.load_login = async () => {
 
 workshop_pages.load_register = async () => {
     const country_list  = document.getElementById('country_list')
-    
     const response = await workshop_pages.getAPI('https://restcountries.com/v2/all')
     const country_names = response.data.map(country => country.name);
     country_names.forEach(name => {
-        console.log(name)
         const option = document.createElement('option');
         option.value = name
         option.text = name
@@ -105,6 +103,17 @@ workshop_pages.load_index = async () => {
     if(token == null){
         window.location.href = 'login.html' 
     }
+
+    const country_list  = document.getElementById('country_list')
+    const countries = await workshop_pages.getAPI('https://restcountries.com/v2/all')
+    const country_names = countries.data.map(country => country.name);
+    country_names.forEach(name => {
+        const option = document.createElement('option');
+        option.value = name
+        option.text = name
+        country_list.appendChild(option);
+    });
+
     let user = JSON.parse(localStorage.getItem('user'));
     let username = document.getElementById('username')
     username.innerHTML += user.name
