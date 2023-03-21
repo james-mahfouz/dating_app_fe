@@ -202,8 +202,7 @@ workshop_pages.load_index = async () => {
     like= document.querySelector(".like-icon")
 
     dislike.addEventListener("click", async () => {
-        const blocked = new FormData();
-        const block = await workshop_pages.postAPI(workshop_pages.base_url+`block/${user_sugg.id}`,blocked, token)
+        workshop_pages.postAPI(workshop_pages.base_url+`block/${user_sugg.id}`,{}, token)
         filtered_users.splice(index, 1)
 
         change_index()
@@ -214,6 +213,8 @@ workshop_pages.load_index = async () => {
         }
     })
     like.addEventListener("click", () => {
+        workshop_pages.postAPI(workshop_pages.base_url+`favorite/${user_sugg.id}`,{}, token)
+
         change_index()
         if(user_sugg.pictures[0]==null){
             change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description)
