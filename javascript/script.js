@@ -213,7 +213,7 @@ workshop_pages.load_index = async () => {
     
     logout.addEventListener('click', async () =>{
         const response = await workshop_pages.getAPI(workshop_pages.base_url + 'logout', token)
-        console.log(response.data)
+        localStorage.removeItem('pp_path')
         localStorage.removeItem('user')
         localStorage.removeItem('token')
         window.location.href = 'login.html'
@@ -226,7 +226,11 @@ workshop_pages.load_index = async () => {
         sugg_gender = document.querySelector('#sugg_gender')
         sugg_bio = document.querySelector('#sugg_bio')
 
-        image.src = url
+        if(url != "images/user.jpg"){
+            image.src = "http://localhost:8000/storage/" + url
+        }else{
+            image.src = url
+        }
         sugg_name.textContent =  name+', '+age
         sugg_location.innerHTML = location 
         if(gender == 1){
@@ -307,7 +311,8 @@ workshop_pages.load_profile = async () =>{
         input_picture = document.getElementById("input_picture").files[0];
         const picture = new FormData()
         picture.append('profile_picture', input_picture)
-        workshop_pages.postAPI(workshop_pages.base_url + "upload_picture",picture, token)
+        const new_path = await workshop_pages.postAPI(workshop_pages.base_url + "upload_picture",picture, token)
+        localStorage.setItem('pp_path',new_path.data.path)
     }
     function user_profile(name, location, gender, bio,url = "images/user.jpg"){
         image=document.querySelector('.user_image img')
