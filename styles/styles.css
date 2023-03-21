@@ -210,15 +210,19 @@ a{
 
 }
 
-#skip{
+.skip_chat{
     width: 30%;
     height: 30px;
-    margin-top: 50px;
+    margin-top: 20px;
     background-color: #FF5858;
     border-radius: 50px;
     color: #fff;
     border: none;
     cursor: pointer;
+}
+
+#chat{
+    margin-top: 10px;
 }
 
 #sugg_bio{
@@ -247,7 +251,7 @@ a{
         align-items: start;
     }
 
-    #skip{
+    .skip_chat{
         margin-left: 250px;
     }
 }

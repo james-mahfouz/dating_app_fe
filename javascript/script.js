@@ -726,6 +726,7 @@ workshop_pages.load_index = async () => {
     })
 
     skip.addEventListener('click', () =>{
+        change_index()
         if(user_sugg.pictures[0]==null){
             change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description)
         }else{
