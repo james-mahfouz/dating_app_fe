@@ -50,9 +50,10 @@ workshop_pages.load_login = async () => {
         const get_users_url = workshop_pages.base_url + `login?email=${email}&password=${password}`;
         const response = await workshop_pages.getAPI(get_users_url);
         if (response.data.status=="success"){
+            console.log(response.data)
             localStorage.setItem('token',response.data.authorisation.token)
             localStorage.setItem('user', JSON.stringify(response.data.user));
-            if(response.data.profile_picture_path.path){
+            if(response.data.profile_picture_path){
                 localStorage.setItem('pp_path', response.data.profile_picture_path.path)
             }
             window.location.href = 'index.html'
@@ -128,11 +129,13 @@ workshop_pages.load_index = async () => {
     const data = new FormData()
     data.append('gender', user.genders_id)
     const response = await workshop_pages.postAPI(workshop_pages.base_url + 'getusers', data, token)
+    console.log(response.data)
     const users = response.data
     let filtered_users = users
     let index = 0
     let user_sugg = filtered_users[index]
-    change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id)
+    console.log(user_sugg.pictures[0].path)
+    change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description, user_sugg.pictures[0].path)
 
     const filter_button = document.getElementById('filter_btn')
     filter_button.addEventListener('click', () =>{
@@ -202,11 +205,15 @@ workshop_pages.load_index = async () => {
 
     dislike.addEventListener("click", () => {
         change_index()
-        change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id)
+        if(user_sugg.pictures[0]==null){
+            change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description)
+        }else{
+            change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description, user_sugg.pictures[0].path)
+        }
     })
     like.addEventListener("click", () => {
         change_index()
-        change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id)
+        change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description, user_sugg.pictures[0].path)
     })
 
     const logout = document.getElementById('logout_btn')
@@ -219,17 +226,17 @@ workshop_pages.load_index = async () => {
         window.location.href = 'login.html'
     })
     
-    function change_suggestions(name,age, location, gender, bio, url = "images/user.jpg"){
+    function change_suggestions(name,age, location, gender, bio, url = null){
         image=document.querySelector('.user_image img')
         sugg_name = document.querySelector('#sugg_name')
         sugg_location = document.querySelector('#sugg_location')
         sugg_gender = document.querySelector('#sugg_gender')
         sugg_bio = document.querySelector('#sugg_bio')
 
-        if(url != "images/user.jpg"){
+        if(url != null){
             image.src = "http://localhost:8000/storage/" + url
         }else{
-            image.src = url
+            image.src = "images/user.jpg"
         }
         sugg_name.textContent =  name+', '+age
         sugg_location.innerHTML = location 
@@ -320,7 +327,7 @@ workshop_pages.load_profile = async () =>{
         sugg_location = document.querySelector('#sugg_location')
         sugg_gender = document.querySelector('#sugg_gender')
         sugg_bio = document.querySelector('#sugg_bio')
-        if(url != "images/user.jpg"){
+        if(url != null){
             image.src = "http://localhost:8000/storage/" + url
         }else{
             image.src = url
