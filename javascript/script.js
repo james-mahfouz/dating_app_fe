@@ -738,6 +738,7 @@ workshop_pages.load_index = async () => {
     chat.addEventListener('click', ()=>{
         workshop_pages.postAPI(workshop_pages.base_url + `chat/${user_sugg.id}`, {}, token)
         create_chat(user_sugg.id, user_sugg.name, user_sugg.age)
+        window.location.href = "chat.html"
     })
 
     const logout = document.getElementById('logout_btn')

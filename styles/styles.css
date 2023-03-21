@@ -341,3 +341,19 @@ a{
     cursor: pointer;
     border-radius: 3px;
 }
+
+.chat_container{
+    margin: auto; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 600px;
+    background-color: #fff;
+}
+
+.chat_input{
+    width: 100%;
+    bottom: 0;
+    position: fixed;
+}
