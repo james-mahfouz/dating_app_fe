@@ -92,7 +92,6 @@ a{
 
 .logo{
     width: 45%;
-    margin-top: 20px;
 }
 
 .logo img{
@@ -102,9 +101,9 @@ a{
 .filter{
     display: flex;
     flex-direction: row;
-    align-items: center;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
+    margin-top: -40px;
 }
 
 #filter_name{
@@ -129,17 +128,21 @@ a{
     z-index: 1;
 }
 
-.filter input, .filter select{
+.filter_input{
+    width: 20%;
+}
+
+.filter_input input, .filter_input select{
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 30%;
+    width: 100%;
 }
 
 .suggestions{
     display: flex;
     flex-direction: row;
-    height: 400px;
+    height: 360px;
     width: 85%;
 }
 
@@ -207,6 +210,17 @@ a{
 
 }
 
+#skip{
+    width: 30%;
+    height: 30px;
+    margin-top: 50px;
+    background-color: #FF5858;
+    border-radius: 50px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
 #sugg_bio{
     max-width: 100%;
 }
@@ -231,6 +245,10 @@ a{
     .infos{
         width: 100%;
         align-items: start;
+    }
+
+    #skip{
+        margin-left: 250px;
     }
 }
 
