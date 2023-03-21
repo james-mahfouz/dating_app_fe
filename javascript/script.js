@@ -255,7 +255,7 @@ workshop_pages.load_profile = async () =>{
     }
     let user = JSON.parse(localStorage.getItem('user'));
     const gender = user.genders_id == 1 ? "Male" : "Female";
-    user_profile(user.name,user.country, gender, user.description)
+    user_profile(user.name,user.country, gender, user.description, localStorage.getItem('pp_path'))
 
     let user_name = document.getElementById("sugg_name")
     let user_location = document.getElementById("sugg_location")
@@ -315,8 +315,11 @@ workshop_pages.load_profile = async () =>{
         sugg_location = document.querySelector('#sugg_location')
         sugg_gender = document.querySelector('#sugg_gender')
         sugg_bio = document.querySelector('#sugg_bio')
-
-        image.src = url
+        if(url != "images/user.jpg"){
+            image.src = "http://localhost:8000/storage/" + url
+        }else{
+            image.src = url
+        }
         sugg_name.textContent +=  name
         sugg_location.innerHTML += location 
         sugg_gender.innerHTML += gender
