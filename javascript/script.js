@@ -201,7 +201,11 @@ workshop_pages.load_index = async () => {
     dislike= document.querySelector(".dislike-icon")
     like= document.querySelector(".like-icon")
 
-    dislike.addEventListener("click", () => {
+    dislike.addEventListener("click", async () => {
+        const blocked = new FormData();
+        const block = await workshop_pages.postAPI(workshop_pages.base_url+`block/${user_sugg.id}`,blocked, token)
+        filtered_users.splice(index, 1)
+
         change_index()
         if(user_sugg.pictures[0]==null){
             change_suggestions(user_sugg.name,user_sugg.age, user_sugg.country, user_sugg.genders_id,user_sugg.description)
