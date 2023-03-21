@@ -734,6 +734,12 @@ workshop_pages.load_index = async () => {
         }  
     })
 
+    const chat = document.getElementById('chat')
+    chat.addEventListener('click', ()=>{
+        workshop_pages.postAPI(workshop_pages.base_url + `chat/${user_sugg.id}`, {}, token)
+        create_chat(user_sugg.id, user_sugg.name, user_sugg.age)
+    })
+
     const logout = document.getElementById('logout_btn')
     
     logout.addEventListener('click', async () =>{
@@ -774,6 +780,20 @@ workshop_pages.load_index = async () => {
             index = 0
         }
         user_sugg = filtered_users[index]
+    }
+
+    function create_chat(id, name, age){
+        const left_bottom = document.querySelector('.left_bottom')
+
+        const new_match = document.createElement('div')
+        new_match.classList.add('match')
+        new_match.setAttribute('id', id)
+    
+        const match_name = document.createElement('h3')
+        match_name.textContent = name + ' ' + age
+
+        new_match.appendChild(match_name)
+        left_bottom.appendChild(new_match)
     }
 }
 
