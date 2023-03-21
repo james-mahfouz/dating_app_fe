@@ -49,10 +49,12 @@ workshop_pages.load_login = async () => {
         const password = document.getElementById('pass_code').value
         const get_users_url = workshop_pages.base_url + `login?email=${email}&password=${password}`;
         const response = await workshop_pages.getAPI(get_users_url);
-        console.log(response.data);
         if (response.data.status=="success"){
             localStorage.setItem('token',response.data.authorisation.token)
             localStorage.setItem('user', JSON.stringify(response.data.user));
+            if(response.data.profile_picture_path.path){
+                localStorage.setItem('pp_path', response.data.profile_picture_path.path)
+            }
             window.location.href = 'index.html'
         }
     }
@@ -91,9 +93,13 @@ workshop_pages.load_register = async () => {
     
 
         const response = await workshop_pages.postAPI(register_users_url, data);
+        console.log(response)
         if (response.data.status=="success"){
             localStorage.setItem('token',response.data.authorisation.token)
             localStorage.setItem('user', JSON.stringify(response.data.user));
+            if(response.data.profile_picture_path.path){
+                localStorage.setItem('pp_path', response.data.profile_picture_path.path)
+            }
             window.location.href = 'index.html'
         }
     }
